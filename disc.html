@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- 仮公開中は検索結果に載せない設定。正式公開（独自ドメイン取得後）にこの行を消す -->
+<meta name="robots" content="noindex">
+<title>DISC | Oo Official Site</title>
+<!-- ページを開いた瞬間から一番上で表示する（前のページのスクロール位置を引き継がない。v20） -->
+<script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap">
+<!-- ファビコン（ブラウザのタブのアイコン）とスマホのホーム画面用アイコン -->
+<link rel="icon" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<!-- デザインは全ページ共通の css/style.css -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== 上部バー（全ページ共通）：左＝ロゴ（ホームへ）／右＝メニュー ===== -->
+<header class="topbar">
+  <a class="logo" href="index.html" aria-label="ホームへ戻る"><img src="images/logo.png" alt="Oo" width="414" height="240"></a>
+  <button class="menu-btn" id="menuOpen" aria-label="メニューを開く" aria-controls="drawer" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ===== メニュー（全ページ共通。TOP / NEWS / LIVE INFO / DISC / GOODS） ===== -->
+<nav class="drawer" id="drawer" hidden aria-label="メニュー">
+  <div class="drawer-head">
+    <span class="logo"><img src="images/logo.png" alt="Oo" width="414" height="240"></span>
+    <button class="close-btn" id="menuClose">閉じる</button>
+  </div>
+  <ul>
+    <li><a href="index.html">TOP</a></li>
+    <li><a href="news.html">NEWS</a></li>
+    <li><a href="live.html">LIVE INFO</a></li>
+    <li><a href="disc.html">DISC</a></li>
+    <li><a href="index.html#goods">GOODS</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+
+  <!-- ===== パンくずリスト ===== -->
+  <nav class="crumbs" aria-label="パンくずリスト">
+    <ol><li><a href="index.html">TOP</a></li><li>&gt;</li><li aria-current="page">DISC</li></ol>
+  </nav>
+
+  <h1 class="page-title">DISC</h1>
+  
+  <!-- ===== 作品は新しい順に上から並べる =====
+       新しい作品を足す時は、下の <article> を1つコピーして一番上に貼り、
+       id（disc-番号）・タイトル・収録曲などを書き換える。
+       ジャケット画像ができたら <div class="jacket">Oo</div> を
+       <img class="jacket" src="images/jacket1.jpg" alt="作品名のジャケット"> に差し替える -->
+
+  <article class="entry" id="disc-1">
+    <div class="disc-entry">
+      <img class="jacket" src="images/ep1.jpg" alt="家出 - EP のジャケット" width="800" height="800">
+      <div class="info">
+        <span class="entry-date">EP / 2026.01.07 Release</span>
+        <h2>家出 - EP</h2>
+        <ol class="tracks">
+          <li>温厚</li>
+          <li>河川敷の友達</li>
+          <li>狭間</li>
+          <li>サニーボーイ</li>
+          <li>飛行少年</li>
+          <li>家出</li>
+        </ol>
+        <!-- 配信リンク（新しいタブで開く） -->
+        <a class="listen" href="https://music.apple.com/jp/album/iede-ep/1863384894" target="_blank" rel="noopener">Apple Musicで聴く</a>
+      </div>
+    </div>
+  </article>
+
+  <article class="entry" id="disc-2">
+    <div class="disc-entry">
+      <img class="jacket" src="images/demo1.jpg" alt="夏越え のジャケット" width="800" height="800">
+      <div class="info">
+        <span class="entry-date">Demo EP / 2025.09.11 Release</span>
+        <h2>1st Demo EP<span class="nowrap">『夏越え』</span></h2>
+        <ol class="tracks">
+          <li>河川敷の友達(Demo)</li>
+          <li>狭間(Demo)</li>
+          <li>家出(Demo)</li>
+          <li>花道(Nature)</li>
+        </ol>
+        <p>CD限定 / Price ¥500</p>
+        <p>完全宅録デモをCD限定でリリースします！<br>現在売り切れ中</p>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="ホームへ戻る"><img src="images/logo.png" alt="Oo" width="414" height="240"></a>
+    <span>© Oo</span>
+  </div>
+</footer>
+
+<!-- 動き（メニュー）は全ページ共通の js/main.js -->
+<script src="js/main.js"></script>
+</body>
+</html>

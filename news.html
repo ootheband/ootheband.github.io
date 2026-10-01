@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- 仮公開中は検索結果に載せない設定。正式公開（独自ドメイン取得後）にこの行を消す -->
+<meta name="robots" content="noindex">
+<title>NEWS | Oo Official Site</title>
+<!-- ページを開いた瞬間から一番上で表示する（前のページのスクロール位置を引き継がない。v20） -->
+<script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap">
+<!-- ファビコン（ブラウザのタブのアイコン）とスマホのホーム画面用アイコン -->
+<link rel="icon" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<!-- デザインは全ページ共通の css/style.css -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== 上部バー（全ページ共通）：左＝ロゴ（ホームへ）／右＝メニュー ===== -->
+<header class="topbar">
+  <a class="logo" href="index.html" aria-label="ホームへ戻る"><img src="images/logo.png" alt="Oo" width="414" height="240"></a>
+  <button class="menu-btn" id="menuOpen" aria-label="メニューを開く" aria-controls="drawer" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ===== メニュー（全ページ共通。TOP / NEWS / LIVE INFO / DISC / GOODS） ===== -->
+<nav class="drawer" id="drawer" hidden aria-label="メニュー">
+  <div class="drawer-head">
+    <span class="logo"><img src="images/logo.png" alt="Oo" width="414" height="240"></span>
+    <button class="close-btn" id="menuClose">閉じる</button>
+  </div>
+  <ul>
+    <li><a href="index.html">TOP</a></li>
+    <li><a href="news.html">NEWS</a></li>
+    <li><a href="live.html">LIVE INFO</a></li>
+    <li><a href="disc.html">DISC</a></li>
+    <li><a href="index.html#goods">GOODS</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+
+  <!-- ===== パンくずリスト ===== -->
+  <nav class="crumbs" aria-label="パンくずリスト">
+    <ol><li><a href="index.html">TOP</a></li><li>&gt;</li><li aria-current="page">NEWS</li></ol>
+  </nav>
+
+  <h1 class="page-title">NEWS</h1>
+
+  <!-- ===== 記事は新しい順に上から並べる =====
+       新しい記事を足す時は、下の <article> を1つコピーして一番上に貼り、
+       id（news-年月日）・日付・見出し・本文を書き換える。
+       ホーム（index.html）のNEWS欄の3件も、同じ id へリンクさせる -->
+
+  <article class="entry" id="news-20261010">
+    <time class="entry-date" datetime="2026-10-10">2026.10.10</time>
+    <h2>公式サイトを開設しました</h2>
+    <!-- 文の区切りで改行したい所に <br> を入れる -->
+    <p>Ooの公式サイトを開設しました。<br>ライブ情報や新しい作品のお知らせは、こちらと公式SNSでお届けします。<br>最新の情報は公式SNSで先にお知らせすることがありますので、あわせてフォローをお願いします。</p>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="ホームへ戻る"><img src="images/logo.png" alt="Oo" width="414" height="240"></a>
+    <span>© Oo</span>
+  </div>
+</footer>
+
+<!-- 動き（メニュー）は全ページ共通の js/main.js -->
+<script src="js/main.js"></script>
+</body>
+</html>

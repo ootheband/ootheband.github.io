@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- 仮公開中は検索結果に載せない設定。正式公開（独自ドメイン取得後）にこの行を消す -->
+<meta name="robots" content="noindex">
+<title>LIVE | Oo Official Site</title>
+<!-- ページを開いた瞬間から一番上で表示する（前のページのスクロール位置を引き継がない。v20） -->
+<script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap">
+<!-- ファビコン（ブラウザのタブのアイコン）とスマホのホーム画面用アイコン -->
+<link rel="icon" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<!-- デザインは全ページ共通の css/style.css -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== 上部バー（全ページ共通）：左＝ロゴ（ホームへ）／右＝メニュー ===== -->
+<header class="topbar">
+  <a class="logo" href="index.html" aria-label="ホームへ戻る"><img src="images/logo.png" alt="Oo" width="414" height="240"></a>
+  <button class="menu-btn" id="menuOpen" aria-label="メニューを開く" aria-controls="drawer" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ===== メニュー（全ページ共通。TOP / NEWS / LIVE INFO / DISC / GOODS） ===== -->
+<nav class="drawer" id="drawer" hidden aria-label="メニュー">
+  <div class="drawer-head">
+    <span class="logo"><img src="images/logo.png" alt="Oo" width="414" height="240"></span>
+    <button class="close-btn" id="menuClose">閉じる</button>
+  </div>
+  <ul>
+    <li><a href="index.html">TOP</a></li>
+    <li><a href="news.html">NEWS</a></li>
+    <li><a href="live.html">LIVE INFO</a></li>
+    <li><a href="disc.html">DISC</a></li>
+    <li><a href="index.html#goods">GOODS</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+
+  <!-- ===== パンくずリスト ===== -->
+  <nav class="crumbs" aria-label="パンくずリスト">
+    <ol><li><a href="index.html">TOP</a></li><li>&gt;</li><li aria-current="page">LIVE</li></ol>
+  </nav>
+
+  <h1 class="page-title">LIVE</h1>
+
+  <!-- ===== ライブ一覧 =====
+       ここは手で書かない。Googleスプレッドシートに1行足すと、js/main.js が自動でここに並べる。
+       各ライブには id（live-年月日）が付き、ホームのLIVE欄からその位置へ直接飛べる -->
+  <div id="livePage"></div>
+
+  <!-- ===== チケットの予約方法（全ライブ共通） ===== -->
+  <p class="ticket-note">チケットのご予約は、公式SNSのDMで受け付けています。<br>
+    <a href="https://x.com/ootheband" target="_blank" rel="noopener">X（@ootheband）</a> ／
+    <a href="https://www.instagram.com/oo_theband/" target="_blank" rel="noopener">Instagram（@oo_theband）</a></p>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="ホームへ戻る"><img src="images/logo.png" alt="Oo" width="414" height="240"></a>
+    <span>© Oo</span>
+  </div>
+</footer>
+
+<!-- 動き（メニュー・LIVE読み込み）は全ページ共通の js/main.js -->
+<script src="js/main.js"></script>
+</body>
+</html>

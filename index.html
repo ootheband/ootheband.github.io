@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- 仮公開中は検索結果に載せない設定。正式公開（独自ドメイン取得後）にこの行を消す -->
+<meta name="robots" content="noindex">
+<title>Oo Official Site</title>
+<meta name="description" content="Oo（バンド）の公式サイト">
+<!-- ページを開いた瞬間から一番上で表示する（前のページのスクロール位置を引き継がない。v20） -->
+<script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap">
+<!-- ファビコン（ブラウザのタブのアイコン）とスマホのホーム画面用アイコン -->
+<link rel="icon" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<!-- デザインは css/style.css にまとめてある（全ページ共通） -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== 上部バー：左＝ロゴ（トップへ戻る）／右＝メニュー ===== -->
+<header class="topbar">
+  <a class="logo" href="#top" aria-label="トップへ戻る"><img src="images/logo.png" alt="Oo" width="414" height="240"></a>
+  <button class="menu-btn" id="menuOpen" aria-label="メニューを開く" aria-controls="drawer" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ===== ハンバーガーメニュー（最初は隠れている） ===== -->
+<nav class="drawer" id="drawer" hidden aria-label="メニュー">
+  <div class="drawer-head">
+    <span class="logo"><img src="images/logo.png" alt="Oo" width="414" height="240"></span>
+    <button class="close-btn" id="menuClose">閉じる</button>
+  </div>
+  <ul>
+    <!-- メニューは TOP / NEWS / LIVE INFO / DISC / GOODS の5つ（v22で SNS・ABOUT を外した） -->
+    <li><a href="#top">TOP</a></li>
+    <li><a href="news.html">NEWS</a></li>
+    <li><a href="live.html">LIVE INFO</a></li>
+    <li><a href="disc.html">DISC</a></li>
+    <li><a href="#goods">GOODS</a></li>
+  </ul>
+</nav>
+
+<main id="top" class="wrap">
+
+  <!-- ホームにはパンくずリストを置かない（v8で「TOP」を削除。別ページには残している） -->
+
+  <!-- ===== トップの大きな写真 ===== -->
+  <figure class="hero">
+    <div class="hero-photo">
+      <!-- アーティスト写真。差し替える時は images/top.jpg を上書きする -->
+      <img src="images/top.jpg" alt="Ooのアーティスト写真" width="1567" height="1045">
+    </div>
+    <figcaption class="hero-cap">
+      <h1 class="hero-title"><img src="images/logo.png" alt="Oo" width="414" height="240"></h1>
+    </figcaption>
+  </figure>
+
+  <!-- ===== 公式SNS ===== -->
+  <!-- 見出し「SNS」は表示しない（v23）。画面を読み上げる機能向けに aria-label で名前だけ付けておく -->
+  <section id="sns" aria-label="SNS">
+    <div class="sns">
+      <!-- Apple Music のロゴ（Ooのアーティストページ） -->
+      <a href="https://music.apple.com/jp/artist/oo/1863335258" target="_blank" rel="noopener" aria-label="Apple Music（Oo）">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <!-- 黒い角丸の四角に、白い音符 -->
+          <rect x="1" y="1" width="22" height="22" rx="5.5" fill="#000"/>
+          <path style="fill:var(--bg)" d="M16.8 5.2v9.9a2.3 2.3 0 1 1-1.4-2.1V8.6l-5.8 1.3v6.9a2.3 2.3 0 1 1-1.4-2.1V7.1z"/>
+        </svg>
+      </a>
+      <!-- YouTube のロゴ -->
+      <a href="https://www.youtube.com/channel/UCYBFsyoKETdhqu4yeluhjTw" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="0.5" y="4" width="23" height="16" rx="4.5" fill="#000"/><path style="fill:var(--bg)" d="M9.75 8.4v7.2L15.9 12z"/></svg>
+      </a>
+      <!-- X のロゴ -->
+      <a href="https://x.com/ootheband" target="_blank" rel="noopener" aria-label="X（@ootheband）">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#000" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+      </a>
+      <!-- Instagram のロゴ -->
+      <a href="https://www.instagram.com/oo_theband/" target="_blank" rel="noopener" aria-label="Instagram（@oo_theband）">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5.5" fill="none" stroke="#000" stroke-width="2.2"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#000" stroke-width="2.2"/><circle cx="17.6" cy="6.4" r="1.4" fill="#000"/></svg>
+      </a>
+      <!-- SoundCloud のロゴ（Vo. 梅原創明のアカウント） -->
+      <a href="https://soundcloud.com/user-657795039-303610242" target="_blank" rel="noopener" aria-label="SoundCloud（梅原創明）">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <g fill="#000">
+            <rect x="0.5" y="12.5" width="1.3" height="4.5" rx=".65"/>
+            <rect x="2.7" y="10.5" width="1.3" height="6.5" rx=".65"/>
+            <rect x="4.9" y="9.5" width="1.3" height="7.5" rx=".65"/>
+            <rect x="7.1" y="8.5" width="1.3" height="8.5" rx=".65"/>
+            <path d="M9.4 7.6a6 6 0 0 1 8.4 3.3A3.1 3.1 0 1 1 20.4 17H9.4z"/>
+          </g>
+        </svg>
+      </a>
+    </div>
+    <p class="sns-note">最新情報はXで。チケットのご予約もSNSのDMから受け付けています。</p>
+  </section>
+
+  <!-- ===== NEWS（最新3件） ===== -->
+  <section id="news" aria-labelledby="news-h">
+    <div class="sec-head"><h2 id="news-h">NEWS</h2></div>
+    <ul class="list">
+      <!-- 各行は NEWSページの該当記事へのリンク（news.html の id と合わせる）
+           記事が増えたら <li> をコピーして一番上に足し、ここは最新3件までにする -->
+      <li><a class="row" href="news.html#news-20261010"><time datetime="2026-10-10">2026.10.10</time><div class="body">公式サイトを開設しました</div></a></li>
+    </ul>
+    <a class="more" href="news.html">VIEW MORE</a>
+  </section>
+
+  <!-- ===== LIVE（直近3件：Googleスプレッドシートから自動で読み込む） ===== -->
+  <section id="live" aria-labelledby="live-h">
+    <div class="sec-head"><h2 id="live-h">LIVE</h2></div>
+    <ul class="list" id="liveList"></ul>
+    <a class="more" href="live.html">VIEW MORE</a>
+  </section>
+
+  <!-- ===== DISC（最新3件） ===== -->
+  <section id="disc" aria-labelledby="disc-h">
+    <div class="sec-head"><h2 id="disc-h">DISC</h2></div>
+    <ul class="disc">
+      <!-- 作品は DISCページの該当作品へのリンク（disc.html の id と合わせる）
+           作品が増えたら <li> をコピーして先頭に足す -->
+      <li><a href="disc.html#disc-1"><img class="jacket" src="images/ep1.jpg" alt="家出 - EP のジャケット" width="800" height="800"><p><b>家出 - EP</b>2026.01.07</p></a></li>
+      <li><a href="disc.html#disc-2"><img class="jacket" src="images/demo1.jpg" alt="夏越え のジャケット" width="800" height="800"><p><b>1st Demo EP<span class="nowrap">『夏越え』</span></b>2025.09.11</p></a></li>
+    </ul>
+    <a class="more" href="disc.html">VIEW MORE</a>
+  </section>
+
+  <!-- ===== ABOUT（v11で PROFILE から名前を変更） =====
+       並び：紹介文（日本語）→ メンバー → 英語の紹介文 -->
+  <section id="about" aria-labelledby="about-h">
+    <div class="sec-head"><h2 id="about-h">ABOUT</h2></div>
+    <div class="about">
+      <!-- 紹介文（日本語） -->
+      <p>Oo(ウー) 京都を拠点に活動中<br>2025年結成</p>
+      <!-- メンバー：1つの文章として「 / 」区切りで並べる。
+           1人分（名前＋担当）の途中では改行しないよう <span> で囲んでいる -->
+      <p class="members"><span>梅原創明(Vocal)</span> / <span>落合考政(Guitar)</span> / <span>ミルクティーマン(Bass)</span> / <span>桒原旺大(Drums)</span></p>
+      <!-- 英語の紹介文 -->
+      <p lang="en">Oo is a band based in Kyoto.<br>Formed in 2025.<br>
+        <span class="members-en">Members: <span>Somei Umehara(Vocal)</span>, <span>Kosei Ochiai(Guitar)</span>, <span>Milk Tea Man(Bass)</span>, <span>Ota Kuwahara(Drums)</span></span></p>
+    </div>
+  </section>
+
+  <!-- ===== GOODS（準備中） ===== -->
+  <section id="goods" aria-labelledby="goods-h">
+    <div class="sec-head"><h2 id="goods-h">GOODS</h2></div>
+    <p>coming soon...</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="トップへ戻る"><img src="images/logo.png" alt="Oo" width="414" height="240"></a>
+    <span>© Oo</span>
+  </div>
+</footer>
+
+<!-- 動き（メニュー・LIVE読み込み）は js/main.js にまとめてある（全ページ共通） -->
+<script src="js/main.js"></script>
+</body>
+</html>
