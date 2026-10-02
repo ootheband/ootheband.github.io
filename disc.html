@@ -18,23 +18,27 @@
 <body>
 
 <!-- ===== 上部バー（全ページ共通）：左＝ロゴ（ホームへ）／右＝メニュー ===== -->
-<header class="topbar">
-  <a class="logo" href="index.html" aria-label="ホームへ戻る"><img src="images/logo.png" alt="Oo" width="414" height="240"></a>
+<!-- ===== メニューボタン（3本線。メニューを開くと折りたたまれて ✕ に変わる。v32） =====
+     メニューより手前に表示するため、ヘッダーの外に置いている（見た目の位置はヘッダーの右端のまま） -->
+<div class="menu-btn-wrap">
   <button class="menu-btn" id="menuOpen" aria-label="メニューを開く" aria-controls="drawer" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
+</div>
+
+<header class="topbar">
+  <a class="logo" href="index.html" aria-label="ホームへ戻る"><img src="images/logo.png" alt="Oo" width="414" height="240"></a>
 </header>
 
-<!-- ===== メニュー（全ページ共通。TOP / NEWS / LIVE INFO / DISC / GOODS） ===== -->
+<!-- ===== メニュー（全ページ共通。TOP / NEWS / LIVE / DISC / GOODS） ===== -->
 <nav class="drawer" id="drawer" hidden aria-label="メニュー">
   <div class="drawer-head">
     <span class="logo"><img src="images/logo.png" alt="Oo" width="414" height="240"></span>
-    <button class="close-btn" id="menuClose">閉じる</button>
   </div>
   <ul>
     <li><a href="index.html">TOP</a></li>
     <li><a href="news.html">NEWS</a></li>
-    <li><a href="live.html">LIVE INFO</a></li>
+    <li><a href="live.html">LIVE</a></li>
     <li><a href="disc.html">DISC</a></li>
     <li><a href="index.html#goods">GOODS</a></li>
   </ul>

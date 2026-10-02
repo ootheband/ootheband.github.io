@@ -19,24 +19,28 @@
 <body>
 
 <!-- ===== 上部バー：左＝ロゴ（トップへ戻る）／右＝メニュー ===== -->
-<header class="topbar">
-  <a class="logo" href="#top" aria-label="トップへ戻る"><img src="images/logo.png" alt="Oo" width="414" height="240"></a>
+<!-- ===== メニューボタン（3本線。メニューを開くと折りたたまれて ✕ に変わる。v32） =====
+     メニューより手前に表示するため、ヘッダーの外に置いている（見た目の位置はヘッダーの右端のまま） -->
+<div class="menu-btn-wrap">
   <button class="menu-btn" id="menuOpen" aria-label="メニューを開く" aria-controls="drawer" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
+</div>
+
+<header class="topbar">
+  <a class="logo" href="#top" aria-label="トップへ戻る"><img src="images/logo.png" alt="Oo" width="414" height="240"></a>
 </header>
 
 <!-- ===== ハンバーガーメニュー（最初は隠れている） ===== -->
 <nav class="drawer" id="drawer" hidden aria-label="メニュー">
   <div class="drawer-head">
     <span class="logo"><img src="images/logo.png" alt="Oo" width="414" height="240"></span>
-    <button class="close-btn" id="menuClose">閉じる</button>
   </div>
   <ul>
-    <!-- メニューは TOP / NEWS / LIVE INFO / DISC / GOODS の5つ（v22で SNS・ABOUT を外した） -->
+    <!-- メニューは TOP / NEWS / LIVE / DISC / GOODS の5つ（v22で SNS・ABOUT を外した） -->
     <li><a href="#top">TOP</a></li>
     <li><a href="news.html">NEWS</a></li>
-    <li><a href="live.html">LIVE INFO</a></li>
+    <li><a href="live.html">LIVE</a></li>
     <li><a href="disc.html">DISC</a></li>
     <li><a href="#goods">GOODS</a></li>
   </ul>
@@ -94,7 +98,10 @@
         </svg>
       </a>
     </div>
-    <p class="sns-note">最新情報はXで。チケットのご予約もSNSのDMから受け付けています。</p>
+    <p class="sns-note">最新情報は各種SNSで<br>チケットのご予約はGoogleフォームまたは、各種SNSのDMから受け付けています</p>
+    <!-- ライブ予約フォーム（Googleフォーム）へのボタン。白背景に黒文字で VIEW MORE と見分ける（v27）
+         新しいタブで開く -->
+    <a class="more more-form" href="https://docs.google.com/forms/d/e/1FAIpQLSeaghyhfgD0ai3GXFe9fibCFdYipPJQn9nDnmaSsC_h_L1ghw/viewform" target="_blank" rel="noopener">ライブ予約フォーム</a>
   </section>
 
   <!-- ===== NEWS（最新3件） ===== -->
@@ -146,7 +153,10 @@
   <!-- ===== GOODS（準備中） ===== -->
   <section id="goods" aria-labelledby="goods-h">
     <div class="sec-head"><h2 id="goods-h">GOODS</h2></div>
-    <p>coming soon...</p>
+    <!-- グッズの写真（ライターとステッカー）。差し替える時は images/goods.jpg を上書きする（v28）
+         置き場所は見出しのすぐ下（v29） -->
+    <img class="goods-photo" src="images/goods.jpg" alt="Ooのライターとステッカー" width="999" height="1000" loading="lazy">
+    <p>ライブ会場でCD・ライター・ステッカーを順次発売中<br>オンライン発売は現在行っておりません</p>
   </section>
 
 </main>

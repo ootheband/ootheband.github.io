@@ -63,12 +63,41 @@ if (document.fonts) {
    ========================================================= */
 const drawer = document.getElementById('drawer');
 const openBtn = document.getElementById('menuOpen');
+// メニューの後ろに敷く半透明の幕（v26でメニューを小窓にしたため追加）
+// 各ページのHTMLに書かなくて済むよう、ここで作ってページに足す。幕を押すとメニューが閉じる
+const backdrop = document.createElement('div');
+backdrop.className = 'menu-backdrop';
+backdrop.hidden = true;
+backdrop.addEventListener('click', () => setMenu(false));
+document.body.appendChild(backdrop);
 function setMenu(open) {
-  drawer.hidden = !open;
-  openBtn.setAttribute('aria-expanded', String(open));
+  openBtn.setAttribute('aria-expanded', String(open));   // これで 3本線 ⇔ ✕ の変形も動く（css/style.css）
+  openBtn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+  if (open) {
+    // 開く：閉じかけの印を外して表示する（右からすべり出る動きは css/style.css 側で付く）
+    drawer.classList.remove('is-closing');
+    backdrop.classList.remove('is-closing');
+    drawer.hidden = false;
+    backdrop.hidden = false;
+    return;
+  }
+  if (drawer.hidden) return;   // もう閉じている時は何もしない
+  // 閉じる：is-closing を付けて右へすべらせ、動きが終わってから隠す（v27）
+  // 動きを減らす設定などで動きが無い時は、すぐに隠す
+  const hide = () => {
+    if (!drawer.classList.contains('is-closing')) return;   // 途中でまた開かれた時は隠さない
+    drawer.hidden = true;
+    backdrop.hidden = true;
+    drawer.classList.remove('is-closing');
+    backdrop.classList.remove('is-closing');
+  };
+  drawer.classList.add('is-closing');
+  backdrop.classList.add('is-closing');
+  if (getComputedStyle(drawer).animationName === 'none') hide();
+  else drawer.addEventListener('animationend', hide, { once: true });
 }
-openBtn.addEventListener('click', () => setMenu(true));
-document.getElementById('menuClose').addEventListener('click', () => setMenu(false));
+// メニューボタンは、閉じている時に押すと開き、開いている時（✕の形）に押すと閉じる（v32）
+openBtn.addEventListener('click', () => setMenu(drawer.hidden || drawer.classList.contains('is-closing')));
 // メニュー内のリンクを押したら自動で閉じる
 drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
 
@@ -101,7 +130,9 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(fals
    ・スプレッドシートを「ウェブに公開（CSV形式）」にして、そのURLを下に貼る
    ・列の並び（1行目は見出し。v16で列を増やした）：
        A 開始日 / B 終了日（1日だけなら空欄）/ C イベント名 / D 会場 / E 出演 /
-       F 時間 / G 料金 / H 予約 / I 詳細（改行したい所に <br> と書く）
+       F 時間 / G 料金 / H 予約 / I 詳細（改行したい所に <br> と書く）/
+       J 画像（images フォルダに置いたファイル名。2枚以上はカンマ区切り。例：mirai2026-1.jpg,mirai2026-2.jpg）（v28）
+     画像は LIVE ページの各公演にだけ表示する（ホームの一覧は文字だけ）
      日付は 2026/10/18 または 2026-10-18 の形で書く
    ・URLが空、または読み込めない時は、下の LIVES_IN_CODE を表示する
    ・終わった公演も含めて、日付の新しい順に表示（v17）。ホームは上から3件、LIVEページは全件
@@ -110,11 +141,13 @@ const SHEET_CSV_URL = ''; // ← 例：'https://docs.google.com/spreadsheets/d/e
 
 // スプレッドシートがつながるまでは、ここに書いた公演を表示する（列の並びはシートと同じ）
 const LIVES_IN_CODE = [
-  ['2026-10-23', '2026-10-25', '未来祭2026', '京大吉田寮', '', '', '入場無料・カンパ制（+2drink）', '', ''],
+  ['2026-10-23', '2026-10-25', '未来祭2026', '京大吉田寮', '', '', '入場無料・カンパ制（+2drink）', '', '',
+   'mirai2026-1.jpg,mirai2026-2.jpg'],
   ['2026-09-20', '', 'WOoHOo vol.1', '京都SUBMARINE',
    '【バンド】Oo / 天国注射 / メシアと人人 / wanbed / 【DJ】アクセサリ',
    'OPEN/START 17:00', 'ADV ¥2,500 / DOOR ¥3,000（+1drink）', '',
-   '"WOoHOo"という定期イベントを始めます⚡vol.1は京都のSUBMARINEにて<br>今回は東京からwanbed、関西からは天国注射、メシアと人人とDJユニットのアクセサリを迎えて開催。'],
+   '"WOoHOo"という定期イベントを始めます⚡vol.1は京都のSUBMARINEにて<br>今回は東京からwanbed、関西からは天国注射、メシアと人人とDJユニットのアクセサリを迎えて開催。',
+   'woohoo1.jpg'],
 ];
 
 // 簡単なCSVの読み取り（ダブルクォートで囲まれたカンマにも対応）
@@ -155,7 +188,9 @@ function toLive(r) {
   if (!start) return null;
   const end = toDate(r[1]) || start;
   return { start, end, title: r[2] || '', venue: r[3] || '', lineup: r[4] || '',
-           time: r[5] || '', price: r[6] || '', ticket: r[7] || '', detail: r[8] || '' };
+           time: r[5] || '', price: r[6] || '', ticket: r[7] || '', detail: r[8] || '',
+           // 画像のファイル名を1枚ずつに分ける（カンマ・読点・空白で区切る。v28）
+           images: String(r[9] || '').split(/[,、s]+/).filter(Boolean) };
 }
 
 // 日付の表示（2日以上の時は「2026.10.23 Fri – 10.25 Sun」）
@@ -231,7 +266,30 @@ function liveArticle(l) {
     const dd = document.createElement('dd'); dd.textContent = v;
     dl.append(dt, dd);
   });
-  art.append(date, h, dl);
+  art.append(date, h);
+  // フライヤーなどの画像（v28）。押すと元の大きさの画像が新しいタブで開く
+  // 置き場所はタイトルのすぐ下（v29。v28は詳細の下だった）
+  if (l.images.length) {
+    const box = document.createElement('div');
+    box.className = 'live-images';
+    l.images.forEach((name, i) => {
+      const a = document.createElement('a');
+      a.href = 'images/' + name;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      const img = document.createElement('img');
+      img.src = 'images/' + name;
+      img.alt = `${l.title || l.venue} の画像${l.images.length > 1 ? (i + 1) : ''}`;
+      // 画像が読み込まれるとページの長さが変わるので、記事へ飛んで来た時は位置を合わせ直す
+      // （上の公演の画像が後から表示されて、目当ての公演が下にずれるのを防ぐ）
+      img.addEventListener('load', () => { if ((location.hash || restoring) && !userScrolled) scrollToTopIfNoTarget(); });
+      a.appendChild(img);
+      box.appendChild(a);
+    });
+    art.appendChild(box);
+  }
+  // 画像の下に、会場・出演などの表と詳細の文章
+  art.appendChild(dl);
   if (l.detail) {
     const p = document.createElement('p');
     p.className = 'live-detail';
