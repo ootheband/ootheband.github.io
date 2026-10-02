@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- サイトマップ：Google などの検索エンジンに、このサイトのページ一覧を知らせるファイル（v35）
+     ページを増やしたら <url> のまとまりを1つ足す。lastmod は最後に更新した日
+     独自ドメインに移ったら、loc の URL をすべて書き換える -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://ootheband.github.io/</loc>
+    <lastmod>2026-10-02</lastmod>
+  </url>
+  <url>
+    <loc>https://ootheband.github.io/news.html</loc>
+    <lastmod>2026-10-02</lastmod>
+  </url>
+  <url>
+    <loc>https://ootheband.github.io/live.html</loc>
+    <lastmod>2026-10-02</lastmod>
+  </url>
+  <url>
+    <loc>https://ootheband.github.io/disc.html</loc>
+    <lastmod>2026-10-02</lastmod>
+  </url>
+</urlset>

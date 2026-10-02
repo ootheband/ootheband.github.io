@@ -1,0 +1,6 @@
+# 検索エンジン向けの案内ファイル（v35）
+# すべてのページを検索に載せてよい、という指定と、サイトマップの場所
+User-agent: *
+Allow: /
+
+Sitemap: https://ootheband.github.io/sitemap.xml
