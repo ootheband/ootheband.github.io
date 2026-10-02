@@ -295,7 +295,7 @@ article.entry:first-of-type { border-top: 1px dashed var(--line); scroll-margin-
 .live-images img { display: block; width: 100%; max-width: 480px; height: auto; }
 
 /* ホームのGOODS欄の写真（v28） */
-.goods-photo { display: block; width: 100%; max-width: 480px; height: auto; margin: 0 0 16px; }   /* 見出しのすぐ下、説明文との間を空ける（v29） */
+.goods-photo { display: block; width: 100%; max-width: 480px; height: auto; margin: 0 auto 16px; }   /* 見出しのすぐ下、説明文との間を空ける（v29）。左右の余白を自動にして中央に置く（v33） */
 
 /* DISCの詳細（ジャケット＋情報を横並び、スマホでは縦並び） */
 .disc-entry { display: grid; grid-template-columns: 1fr; gap: 16px; }
