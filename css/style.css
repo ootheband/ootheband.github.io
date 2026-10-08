@@ -1,7 +1,7 @@
 /* =========================================================
    Oo 公式サイト 共通デザイン (v21)
    全ページ（index / news / live / disc）がこの1ファイルを読み込む
-   レイアウト方針：スマホ1カラム。大きな写真 → SNS → NEWS → LIVE → DISC → ABOUT の順に縦へ流す
+   レイアウト方針：スマホ1カラム。大きな写真 → SNS → NEWS → LIVE → DISC → GOODS → ABOUT の順に縦へ流す
    ========================================================= */
 
 /* ---- 色と文字の設定（ここを変えるとサイト全体が変わる） ---- */
@@ -111,6 +111,10 @@ a:focus-visible, button:focus-visible { outline: 2px dashed var(--ink); outline-
 .menu-backdrop.is-closing { animation: fade-out .25s ease-in forwards; }
 @keyframes fade-in  { from { opacity: 0; } to { opacity: 1; } }
 @keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
+
+/* メニューを開いている間は、後ろのページをスクロールさせない（js/main.js が html に menu-open を付ける。v37） */
+/* scrollbar-gutter: stable … PCでスクロールバーが消えても、その幅を空けたままにして、ページが横にずれないようにする */
+html.menu-open { overflow: hidden; scrollbar-gutter: stable; }
 
 /* 動きを減らす設定の人には、すべらせずにすぐ表示する */
 @media (prefers-reduced-motion: reduce) {

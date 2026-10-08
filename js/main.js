@@ -35,7 +35,9 @@ scrollToTopIfNoTarget();
 // その時は見ていた位置もそのまま残っているので、動かさない（v23）
 window.addEventListener('pageshow', e => { if (!e.persisted) scrollToTopIfNoTarget(); });
 // 画像などが読み込み終わった後にも、位置を合わせ直す（読み込み中はページの長さが変わるため）
-window.addEventListener('load', () => { if (location.hash || restoring) scrollToTopIfNoTarget(); });
+// ただし、それまでに見ている人が自分でスクロールし始めていたら、引き戻さないよう何もしない（v37）
+// （userScrolled は下の「文字の読み込み」のところで用意している）
+window.addEventListener('load', () => { if ((location.hash || restoring) && !userScrolled) scrollToTopIfNoTarget(); });
 
 /* 今見ている位置を、ブラウザの履歴に記録しておく（v23）
    ・スクロールが止まった時（0.2秒動かなかった時）と、ページを離れる直前に記録する
@@ -70,9 +72,17 @@ backdrop.className = 'menu-backdrop';
 backdrop.hidden = true;
 backdrop.addEventListener('click', () => setMenu(false));
 document.body.appendChild(backdrop);
+// メニューの後ろにある部分（ヘッダー・本文・フッター）。メニューを開いている間は操作できなくする（v37）
+const behindMenu = document.querySelectorAll('body > header, body > main, body > footer');
 function setMenu(open) {
   openBtn.setAttribute('aria-expanded', String(open));   // これで 3本線 ⇔ ✕ の変形も動く（css/style.css）
   openBtn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+  // 開いている間は、後ろのページがスクロールしないようにする（css/style.css の html.menu-open。v37）
+  document.documentElement.classList.toggle('menu-open', open);
+  // inert … 「触れない・Tabキーで選べない」状態にする指定。開いている間、後ろのリンクに移動できないようにする（v37）
+  behindMenu.forEach(el => { el.inert = open; });
+  // メニューの中のリンクを選んだままで閉じた時は、選択をメニューボタンに戻す（どこを操作中か分からなくならないように）
+  if (!open && drawer.contains(document.activeElement)) openBtn.focus({ preventScroll: true });
   if (open) {
     // 開く：閉じかけの印を外して表示する（右からすべり出る動きは css/style.css 側で付く）
     drawer.classList.remove('is-closing');
@@ -190,7 +200,8 @@ function toLive(r) {
   return { start, end, title: r[2] || '', venue: r[3] || '', lineup: r[4] || '',
            time: r[5] || '', price: r[6] || '', ticket: r[7] || '', detail: r[8] || '',
            // 画像のファイル名を1枚ずつに分ける（カンマ・読点・空白で区切る。v28）
-           images: String(r[9] || '').split(/[,、s]+/).filter(Boolean) };
+           // \s は「空白」の意味（v37で \ の抜けを修正。抜けていると英字の s で区切ってしまっていた）
+           images: String(r[9] || '').split(/[,、\s]+/).filter(Boolean) };
 }
 
 // 日付の表示（2日以上の時は「2026.10.23 Fri – 10.25 Sun」）
@@ -324,7 +335,12 @@ async function loadLives() {
   if (!SHEET_CSV_URL) { renderLives(LIVES_IN_CODE); return; }
   try {
     const res = await fetch(SHEET_CSV_URL);
-    const rows = parseCSV(await res.text()).slice(1); // 1行目は見出しなので飛ばす
+    // 読み込みに失敗した時（ページが見つからない等）は、下の catch へ進んで予備のデータを表示する（v37）
+    if (!res.ok) throw new Error('読み込み失敗：' + res.status);
+    const text = await res.text();
+    // CSVの代わりにエラー画面やログイン画面（HTML。「<」で始まる）が返ってきた時も、失敗として扱う（v37）
+    if (text.trim().startsWith('<')) throw new Error('CSVではないデータが返ってきた');
+    const rows = parseCSV(text).slice(1); // 1行目は見出しなので飛ばす
     renderLives(rows);
   } catch (e) {
     renderLives(LIVES_IN_CODE); // 読み込めなかった時はこのファイル内のデータを表示
